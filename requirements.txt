@@ -1,0 +1,9 @@
+fastapi==0.103.2
+pydantic==1.10.15
+starlette==0.27.0
+uvicorn[standard]==0.23.2
+SQLAlchemy>=2.0,<2.1
+# Choose ONE:
+asyncpg>=0.29,<0.30
+# or
+# psycopg[binary]>=3.1,<3.2
