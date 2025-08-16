@@ -12,4 +12,4 @@ async def health_live() -> JSONResponse:
 @router.get("/ready")
 async def health_ready() -> JSONResponse:
     # Readiness: dependencies OK (wire DB/Redis checks here later)
-    return JSONResponse({"ok": True, "service": "upa-api", "check": "Web API ready"})
+    return JSONResponse({"ok": True, "service": "upa-api", "check": "Welcome to UPA Pool League API!"})
