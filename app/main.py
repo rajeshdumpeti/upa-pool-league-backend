@@ -1,25 +1,47 @@
 # app/main.py
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+import logging
 
-from app.core.config import settings
-from app.api.routers import health  # existing health router
+from app.api.routers import health  # /api/v1/health/*
+
+logger = logging.getLogger("uvicorn")
 
 app = FastAPI(
-    title=settings.APP_NAME,
-    version=settings.VERSION,
+    title="upa-api",
+    version="1.0.0",
     docs_url="/docs",
     openapi_url="/openapi.json",
 )
 
-# CORS (allow mobile app / local dev tools to call the API)
+# --- CORS ---
+# Note: Native mobile apps are not subject to CORS, but enabling it helps for:
+# - Web previews (Expo web), admin tools, embedded webviews, etc.
+# We use regex to allow any Render subdomain and ngrok tunnel.
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=settings.CORS_ORIGINS,   # ["*"] in dev by default; tighten in prod
-    allow_credentials=False,
-    allow_methods=["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+    allow_origin_regex=r"^(https?://localhost(:\d+)?|https?://127\.0\.0\.1(:\d+)?|https://[a-z0-9\-]+\.onrender\.com|https://[a-z0-9\-]+\.ngrok-free\.app)$",
+    allow_credentials=True,
+    allow_methods=["*"],
     allow_headers=["*"],
 )
 
-# Mount versioned API routes
+# --- Routers (versioned API) ---
 app.include_router(health.router, prefix="/api/v1")
+
+# --- Root ping (non-versioned) ---
+@app.get("/", tags=["root"])
+def root():
+    """
+    Lightweight root ping so platform health checks (or a browser) get an immediate response.
+    """
+    return {"service": "upa-pool-league-api", "status": "ok", "version": "1.0.0"}
+
+# Optional: log startup nicely
+@app.on_event("startup")
+async def on_startup():
+    logger.info("upa-api starting up")
+
+@app.on_event("shutdown")
+async def on_shutdown():
+    logger.info("upa-api shutting down")

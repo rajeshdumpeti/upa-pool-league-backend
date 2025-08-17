@@ -7,7 +7,7 @@ router = APIRouter(prefix="/health", tags=["health"])
 @router.get("/live")
 async def health_live() -> JSONResponse:
     # Liveness: process is up
-    return JSONResponse({"ok": True, "service": "upa-api", "check": "live"})
+    return JSONResponse({"ok": True, "service": "upa-pool-league-app", "check": "Welcome to UPA Pool League API!"})
 
 @router.get("/ready")
 async def health_ready() -> JSONResponse:
