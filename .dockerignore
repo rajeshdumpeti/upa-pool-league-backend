@@ -1,0 +1,32 @@
+# python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.pytest_cache/
+.mypy_cache/
+.pytest_cache/
+
+# venv
+.venv/
+env/
+venv/
+
+# git/ci/editor
+.git/
+.github/
+.idea/
+.vscode/
+
+# bytecode & build
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# OS
+.DS_Store
+
+# docker
+Dockerfile*
+docker-compose*.yml
