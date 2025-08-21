@@ -3,7 +3,6 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 import logging
 # app/main.py (only showing the new lines)
-from app.api.routers import health, matches, match_games  # add match_games
 from app.api.routers import health, matches, match_games, score_events
 
 logger = logging.getLogger("uvicorn")
