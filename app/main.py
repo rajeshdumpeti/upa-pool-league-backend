@@ -4,6 +4,7 @@ from fastapi.middleware.cors import CORSMiddleware
 import logging
 
 from app.api.routers import health  # /api/v1/health/*
+from app.api.routers import health, matches
 
 logger = logging.getLogger("uvicorn")
 
@@ -45,3 +46,7 @@ async def on_startup():
 @app.on_event("shutdown")
 async def on_shutdown():
     logger.info("upa-api shutting down")
+    
+# Mount versioned API routes
+app.include_router(health.router, prefix="/api/v1")
+app.include_router(matches.router, prefix="/api/v1")  # <-- NEW
