@@ -51,7 +51,10 @@ jobs:
 
       - name: Run tests
         env:
-          UPA_DATABASE_URL: postgresql+asyncpg://postgres:postgres@localhost:5432/upa_test
-          UPA_APP_ENV: test
-          UPA_JWT_SECRET: test-secret
-        run: pytest -q
+        PYTHONPATH:
+          ${{github.workspace}}
+
+          # UPA_DATABASE_URL: postgresql+asyncpg://postgres:postgres@localhost:5432/upa_test
+          # UPA_APP_ENV: test
+          # UPA_JWT_SECRET: test-secret
+        run: python -m pytest -q
