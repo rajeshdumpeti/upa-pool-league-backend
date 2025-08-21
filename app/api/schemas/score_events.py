@@ -19,6 +19,7 @@ EventType = Literal[
     "8",  # legal 8
 ]
 
+
 class ScoreEventIn(BaseModel):
     ts: str = Field(..., description="Client event timestamp ISO-8601")
     actor_player_id: int = Field(..., description="Who performed the event")

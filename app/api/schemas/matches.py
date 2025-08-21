@@ -12,7 +12,9 @@ GameFormat = Literal["8-ball", "9-ball", "10-ball"]
 class PlayerRef(BaseModel):
     id: int = Field(..., description="Player id from roster/lookup")
     name: Optional[str] = Field(None, description="Optional display name")
-    skill: Optional[int] = Field(None, ge=1, le=10, description="Optional UPA skill (1-10)")
+    skill: Optional[int] = Field(
+        None, ge=1, le=10, description="Optional UPA skill (1-10)"
+    )
 
 
 class TeamRef(BaseModel):
@@ -26,7 +28,9 @@ class LineupEntry(BaseModel):
 
 
 class MatchCreateRequest(BaseModel):
-    division_id: Optional[int] = Field(None, description="Division this match belongs to")
+    division_id: Optional[int] = Field(
+        None, description="Division this match belongs to"
+    )
     date: Optional[str] = Field(None, description="ISO date (server may override)")
     format: GameFormat = "8-ball"
     home_team: TeamRef
@@ -40,7 +44,9 @@ class MatchCreateRequest(BaseModel):
         ..., min_length=1, max_length=8, description="Away lineup (1..8 players)"
     )
 
-    coin_toss_winner_team_id: Optional[int] = Field(None, description="Team id that won toss")
+    coin_toss_winner_team_id: Optional[int] = Field(
+        None, description="Team id that won toss"
+    )
     notes: Optional[str] = None
 
 
