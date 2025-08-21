@@ -4,7 +4,7 @@
 # These return deterministic fake IDs so the mobile app can integrate now.
 # -----------------------------------------------------------------------------
 from fastapi import APIRouter, status
-from app.schemas.match_games import (
+from app.api.schemas.match_games import (
     CreateMatchGame,
     MatchGameCreated,
     CompleteMatchGame,

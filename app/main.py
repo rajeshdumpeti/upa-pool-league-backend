@@ -4,6 +4,7 @@ from fastapi.middleware.cors import CORSMiddleware
 import logging
 # app/main.py (only showing the new lines)
 from app.api.routers import health, matches, match_games  # add match_games
+from app.api.routers import health, matches, match_games, score_events
 
 
 from app.api.routers import health, matches
@@ -50,9 +51,10 @@ async def on_shutdown():
     logger.info("upa-api shutting down")
     
 # Mount versioned API routes
-app.include_router(health.router, prefix="/api/v1")
-app.include_router(matches.router, prefix="/api/v1")  # <-- NEW
+
+# app/main.py  (only new import/include shown)
 
 app.include_router(health.router, prefix="/api/v1")
 app.include_router(matches.router, prefix="/api/v1")
-app.include_router(match_games.router, prefix="/api/v1")  # new
+app.include_router(match_games.router, prefix="/api/v1")
+app.include_router(score_events.router, prefix="/api/v1")  # NEW
