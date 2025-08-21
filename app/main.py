@@ -6,9 +6,6 @@ import logging
 from app.api.routers import health, matches, match_games  # add match_games
 from app.api.routers import health, matches, match_games, score_events
 
-
-from app.api.routers import health, matches
-
 logger = logging.getLogger("uvicorn")
 
 app = FastAPI(
