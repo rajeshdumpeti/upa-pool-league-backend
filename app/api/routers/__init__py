@@ -1,5 +1,0 @@
-# app/api/routers/__init__.py
-from . import health  # existing
-from . import matches
-
-__all__ = ["health", "matches"]

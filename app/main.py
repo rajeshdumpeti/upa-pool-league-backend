@@ -2,8 +2,10 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 import logging
+# app/main.py (only showing the new lines)
+from app.api.routers import health, matches, match_games  # add match_games
 
-from app.api.routers import health  # /api/v1/health/*
+
 from app.api.routers import health, matches
 
 logger = logging.getLogger("uvicorn")
@@ -50,3 +52,7 @@ async def on_shutdown():
 # Mount versioned API routes
 app.include_router(health.router, prefix="/api/v1")
 app.include_router(matches.router, prefix="/api/v1")  # <-- NEW
+
+app.include_router(health.router, prefix="/api/v1")
+app.include_router(matches.router, prefix="/api/v1")
+app.include_router(match_games.router, prefix="/api/v1")  # new

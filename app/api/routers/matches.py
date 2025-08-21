@@ -4,7 +4,7 @@
 # so the mobile app can integrate / proceed. Later P1+ will persist to Postgres.
 # -----------------------------------------------------------------------------
 from fastapi import APIRouter, status
-from app.api.schemas.matches import MatchCreateRequest, MatchCreateResponse
+from app.schemas.matches import MatchCreateRequest, MatchCreateResponse
 
 router = APIRouter(prefix="/matches", tags=["matches"])
 
