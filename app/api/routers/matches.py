@@ -4,9 +4,10 @@
 # so the mobile app can integrate / proceed. Later P1+ will persist to Postgres.
 # -----------------------------------------------------------------------------
 from fastapi import APIRouter, status
-from app.schemas.matches import MatchCreateRequest, MatchCreateResponse
+from app.api.schemas.matches import MatchCreateRequest, MatchCreateResponse
 
 router = APIRouter(prefix="/matches", tags=["matches"])
+
 
 # In P0 we do not hit the DB. We return a deterministic fake id so mobile can proceed.
 # Use 201 Created to signal resource creation semantics.
@@ -15,7 +16,7 @@ router = APIRouter(prefix="/matches", tags=["matches"])
     response_model=MatchCreateResponse,
     status_code=status.HTTP_201_CREATED,
     summary="Create a new match (stub)",
-    description="Accepts Pre‑Match details and returns a stub id. No DB writes in P0."
+    description="Accepts Pre‑Match details and returns a stub id. No DB writes in P0.",
 )
 async def create_match(payload: MatchCreateRequest) -> MatchCreateResponse:
     # Simple deterministic fake id so each request is distinguishable without a DB.
