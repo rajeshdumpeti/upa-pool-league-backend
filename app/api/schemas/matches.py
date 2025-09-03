@@ -58,3 +58,7 @@ class MatchCreateResponse(BaseModel):
     format: GameFormat
     home_team_id: int
     away_team_id: int
+
+class MatchSubmitted(BaseModel):
+    id: int
+    status: str  # "submitted"
