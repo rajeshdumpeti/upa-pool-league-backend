@@ -2,10 +2,11 @@
 # -----------------------------------------------------------------------------
 # Purpose: Accept a batch of score events for a given match_game (rack). P0 stub.
 # -----------------------------------------------------------------------------
-from fastapi import APIRouter
+from fastapi import APIRouter, Depends
 from app.api.schemas.score_events import ScoreEventsBatchIn, ScoreEventsBatchAck
+from app.api.deps import require_user
 
-router = APIRouter(prefix="/match-games", tags=["score_events"])
+router = APIRouter(prefix="/match-games", tags=["score_events"], dependencies=[Depends(require_user)])
 
 
 @router.post("/{game_id}/score-events:batch", response_model=ScoreEventsBatchAck)

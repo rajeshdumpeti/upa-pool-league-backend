@@ -3,15 +3,17 @@
 # Purpose: Stub endpoints for creating & completing match games (racks).
 # These return deterministic fake IDs so the mobile app can integrate now.
 # -----------------------------------------------------------------------------
-from fastapi import APIRouter, status
+from fastapi import APIRouter, status, Depends
 from app.api.schemas.match_games import (
     CreateMatchGame,
     MatchGameCreated,
     CompleteMatchGame,
     MatchGamePatched,
 )
+from app.api.deps import require_user
 
-router = APIRouter(prefix="/match-games", tags=["match_games"])
+router = APIRouter(prefix="/match-games", tags=["match_games"], dependencies=[Depends(require_user)])
+# router = APIRouter(prefix="/match-games", tags=["match_games"])
 
 
 @router.post(

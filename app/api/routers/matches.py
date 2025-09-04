@@ -3,14 +3,16 @@
 # Purpose: Pre-Match endpoints. P0 returns a stubbed match id (no DB yet)
 # so the mobile app can integrate / proceed. Later P1+ will persist to Postgres.
 # -----------------------------------------------------------------------------
-from fastapi import APIRouter, Body, status
+from fastapi import APIRouter, Body, status, Depends
 from app.api.schemas.matches import (
     MatchCreateRequest,
     MatchCreateResponse,
     MatchSubmitted,
 )
+from app.api.deps import require_user
 
-router = APIRouter(prefix="/matches", tags=["matches"])
+router = APIRouter(prefix="/matches", tags=["matches"], dependencies=[Depends(require_user)])
+# router = APIRouter(prefix="/matches", tags=["matches"])
 
 
 @router.post(
