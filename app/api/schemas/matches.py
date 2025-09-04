@@ -36,6 +36,7 @@ class MatchCreateRequest(BaseModel):
     home_team: TeamRef
     away_team: TeamRef
 
+
     # Pydantic v2 way: use Field with min_length / max_length
     home_lineup: List[LineupEntry] = Field(
         ..., min_length=1, max_length=8, description="Home lineup (1..8 players)"
