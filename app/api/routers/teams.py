@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Depends
 from app.api.schemas.teams import TeamOut, PlayerOut
-from app.api.routers.auth import get_current_user  # you already have this
+from app.api.deps import get_current_user  # Adjusted import to match typical FastAPI project structure
 
 router = APIRouter(prefix="/teams", tags=["teams"])
 
