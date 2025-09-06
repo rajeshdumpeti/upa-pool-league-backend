@@ -15,3 +15,4 @@ class MeResponse(BaseModel):
     sub: str
     email: EmailStr
     scope: str
+    

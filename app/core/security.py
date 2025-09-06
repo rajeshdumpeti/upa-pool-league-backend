@@ -1,35 +1,29 @@
-# app/core/security.py
-from datetime import datetime, timedelta, timezone
-from typing import Any, Dict, Optional
+# add at top if missing
+from datetime import datetime, timedelta
 from jose import jwt
 from app.core.config import settings
 
-ALGO = "HS256"
-
-def create_access_token(
-    *, sub: str, scope: str = "mobile", expires_minutes: Optional[int] = None, extra: Dict[str, Any] | None = None
-) -> str:
-    now = datetime.now(timezone.utc)
-    exp_min = expires_minutes or settings.JWT_EXPIRES_MIN
-    payload: Dict[str, Any] = {
-        "iss": settings.JWT_ISSUER,
-        "aud": settings.JWT_AUDIENCE,
-        "iat": int(now.timestamp()),
-        "nbf": int(now.timestamp()),
-        "exp": int((now + timedelta(minutes=exp_min)).timestamp()),
+# REPLACE your existing create_access_token with:
+def create_access_token(*, sub: str, email: str, scope: str = "mobile", expires_minutes: int | None = None) -> str:
+    now = datetime.utcnow()
+    exp_mins = expires_minutes or settings.JWT_EXPIRES_MIN
+    payload = {
         "sub": sub,
+        "email": email.lower(),
         "scope": scope,
+        "iss": settings.JWT_ISSUER,   # <- must match decode
+        "aud": settings.JWT_AUDIENCE, # <- must match decode
+        "iat": int(now.timestamp()),
+        "exp": int((now + timedelta(minutes=exp_mins)).timestamp()),
     }
-    if extra:
-        payload.update(extra)
-    return jwt.encode(payload, settings.JWT_SECRET, algorithm=ALGO)
+    return jwt.encode(payload, settings.JWT_SECRET, algorithm="HS256")
 
-def decode_token(token: str) -> Dict[str, Any]:
+# REPLACE your existing decode_token (ensure issuer/audience verified):
+def decode_token(token: str) -> dict:
     return jwt.decode(
         token,
         settings.JWT_SECRET,
-        algorithms=[ALGO],
-        issuer=settings.JWT_ISSUER,
+        algorithms=["HS256"],
         audience=settings.JWT_AUDIENCE,
-        options={"require_exp": True, "require_iat": True, "require_sub": True},
+        issuer=settings.JWT_ISSUER,
     )
