@@ -21,9 +21,9 @@ RUN pip install --upgrade pip && pip install -r requirements.txt
 COPY app ./app
 
 # ---- Runtime env (override in deploy)
-ENV UPA_APP_ENV=prod \
-    UPA_DATABASE_URL="" \
-    UPA_JWT_SECRET="change-me"
+ENV APP_ENV=prod \
+    DATABASE_URL="" \
+    JWT_SECRET="change-me"
 
 # ---- Expose & default command (uvicorn, multi-worker)
 EXPOSE 8000

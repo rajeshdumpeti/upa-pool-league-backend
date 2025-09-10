@@ -50,7 +50,7 @@ cd upa-pool-league-backend
 Create a `.env` file in root:
 
 ```ini
-DATABASE_URL=postgresql://postgres:yourpassword@localhost:5432/upa_pool
+DATABASE_URL=postgresql+psycopg://postgres:yourpassword@localhost:5432/upa_pool
 JWT_SECRET_KEY=your-secret-key
 ```
 
