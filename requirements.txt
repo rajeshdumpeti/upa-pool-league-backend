@@ -8,7 +8,7 @@ sqlalchemy[asyncio]==2.0.32
 alembic==1.16.5
 
 # --- Caching / queues (optional for now) ---
-redis==5.0.8
+redis==6.4.0
 
 # --- Config & validation ---
 pydantic==2.9.2
