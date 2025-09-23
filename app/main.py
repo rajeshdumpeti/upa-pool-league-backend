@@ -27,10 +27,6 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# --- Routers (versioned API) ---
-app.include_router(health.router, prefix="/api/v1")
-
-
 # --- Root ping (non-versioned) ---
 @app.get("/", tags=["root"])
 def root():

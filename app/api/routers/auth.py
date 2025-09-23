@@ -20,10 +20,6 @@ now = datetime.utcnow()
 user_id = DEV_USER["email"]  # Using email as a stable user identifier for dev
 user_email = DEV_USER["email"]
 
-DEV_USER = {
-    "email": "dev@example.com",  # (or change to dev@upa.test if you prefer)
-    "password": "password123",
-}
 
 @router.post("/login", response_model=TokenResponse, summary="Login (P0 stub)")
 async def login(body: LoginRequest) -> TokenResponse:

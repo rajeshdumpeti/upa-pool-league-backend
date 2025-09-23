@@ -1,5 +1,5 @@
 # app/db/models.py
-from sqlalchemy import String, Boolean, ForeignKey
+from sqlalchemy import String, Boolean, ForeignKey, Integer  # <-- add Integer
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from .base import Base
 
@@ -15,8 +15,9 @@ class Team(Base):
 class Player(Base):
     __tablename__ = "players"
     id: Mapped[int] = mapped_column(primary_key=True)
-    email: Mapped[str] = mapped_column(String(255), unique=True, nullable=False)
     name: Mapped[str] = mapped_column(String(120), nullable=False)
+    skill: Mapped[int] = mapped_column(Integer, nullable=False, default=4)
+    is_active: Mapped[bool] = mapped_column(Boolean, default=True)
 
 class TeamPlayer(Base):
     __tablename__ = "team_players"
